@@ -1,0 +1,42 @@
+
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>MyApp</h2>
+    <p>Navigation</p>
+  </div>
+  
+<ul class="menu-list">
+  <li *ngFor="let item of menuItems" class="menu-item-wrapper">
+    <!-- If the item has subItems, show expandable menu -->
+    <div *ngIf="item.subItems && item.subItems.length > 0">
+      <div (click)="toggleSubmenu(item)" class="menu-header" [class.expanded]="expandedItems[item.lable]">
+        <span class="menu-text">
+          <b>{{ item.lable }}</b>
+        </span>
+        <span class="expand-icon">{{ expandedItems[item.lable] ? '▾' : '▸' }}</span>
+      </div>
+      <ul *ngIf="expandedItems[item.lable]" class="submenu expanded">
+        <li *ngFor="let sub of item.subItems" class="submenu-item">
+          <a [routerLink]="sub.route" class="submenu-link" routerLinkActive="active">
+            {{ sub.lable }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- If no subItems, show as regular item -->
+    <a *ngIf="!item.subItems || item.subItems.length === 0" [routerLink]="item.route" class="menu-link" routerLinkActive="active">
+      <b>{{ item.lable }}</b>
+    </a>
+  </li>
+
+  <!-- Always show Home -->
+  <!-- <li class="menu-item-wrapper">
+    <a [routerLink]="['/']" class="menu-link" routerLinkActive="active">
+      <b>Home</b>
+    </a>
+  </li> -->
+</ul>
+
+</div>

@@ -1,0 +1,29 @@
+<p>product-category-view-all works!</p>
+
+<div *ngIf="productcategoryList && productcategoryList.length > 0">
+  <table>
+    <thead>
+      <tr>
+        <th>productName</th>
+        <th>productDescription</th>
+        <th>ingreedians</th>
+        <th>active</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pc of productcategoryList">
+        <td>{{ pc.productName }}</td>
+        <td>{{ pc.productDescription }}</td>
+        <td>{{ pc.ingreedians }}</td>
+        <td>{{ pc.active }}</td>
+        <td>
+          <button (click)="onEditCategory( pc)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="productcategoryList && productcategoryList.length === 0">
+  <p>No product category available.</p>
+</div>

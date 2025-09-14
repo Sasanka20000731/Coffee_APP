@@ -1,0 +1,77 @@
+
+<div class="add-ticket">
+    <div>add-ticket works!</div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6">
+ 
+                
+<form (ngSubmit)="submitTicket()" #ticketForm="ngForm">
+  <div class="mb-3">
+    <label for="ticketTitle" class="form-label">Ticket Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="ticketTitle"
+      placeholder="Enter ticket title"
+      [(ngModel)]="ticket.ticketTitle"
+      name="ticketTitle"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="ticketDescription" class="form-label">Ticket Description</label>
+    <textarea
+      class="form-control"
+      id="ticketDescription"
+      rows="3"
+      placeholder="Enter ticket description"
+      [(ngModel)]="ticket.ticketDescription"
+      name="ticketDescription"
+      required
+    ></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="ticketCategory" class="form-label">Ticket Category</label>
+    <select
+      class="form-select"
+      id="ticketCategory"
+      [(ngModel)]="ticket.ticketCategory"
+      name="ticketCategory"
+      required
+    >
+      <option value=0>Choose category</option>
+      <option value=1>Technical Issue</option>
+      <option value=2>Billing Inquiry</option>
+      <option value=3>General Question</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="ticketPriority" class="form-label">Ticket Priority</label>
+    <select
+      class="form-select"
+      id="ticketPriority"
+      [(ngModel)]="ticket.ticketPriority"
+      name="ticketPriority"
+      required
+    >
+      <option value=0>Choose priority</option>
+      <option value=1>Low</option>
+      <option value=2>Medium</option>
+      <option value=3>High</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="ticketForm.invalid">Submit Ticket</button>
+</form>
+            </div>
+
+    </div>
+
+</div>
+
+

@@ -1,0 +1,85 @@
+<div class="user-registration container mt-5 p-4 shadow rounded bg-light">
+  <h1 class="mb-4 text-center">User Registration</h1>
+
+  <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+    <div class="form-group mb-3">
+      <label for="username" class="form-label">User name:</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        ngModel
+        required
+        #username="ngModel"
+        class="form-control"
+        placeholder="Enter your username"
+        aria-describedby="usernameHelp"
+      />
+      <small id="usernameHelp" class="form-text text-muted">Choose a unique username.</small>
+      <div *ngIf="username.invalid && username.touched" class="text-danger">
+        Username is required.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        ngModel
+        required
+        #email="ngModel"
+        class="form-control"
+        placeholder="Enter your email"
+        aria-describedby="emailHelp"
+      />
+      <small id="emailHelp" class="form-text text-muted">We won't share your email.</small>
+      <div *ngIf="email.invalid && email.touched" class="text-danger">
+        Valid email is required.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <small id="userTypeHelp" class="form-text text-muted">Select your user role.</small>
+      <td>
+      <label for="userType" class="form-label">User Type:  </label>
+      
+      <select class="form-group"
+        id="userType"
+        [(ngModel)]="selectedUserTypeId"
+        name="userType"
+        class="form-select"
+        required
+        aria-describedby="userTypeHelp"
+      >
+        <option *ngFor="let type of userTypes" [value]="type.value">{{ type.name }}</option>
+      </select>
+
+      
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="password" class="form-label">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        ngModel
+        required
+        #password="ngModel"
+        class="form-control"
+        placeholder="Enter your password"
+        aria-describedby="passwordHelp"
+      />
+      <small id="passwordHelp" class="form-text text-muted">Choose a strong password.</small>
+      <div *ngIf="password.invalid && password.touched" class="text-danger">
+        Password is required.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="registrationForm.invalid" class="btn btn-primary w-100">
+      Register
+    </button>
+  </form>
+</div>

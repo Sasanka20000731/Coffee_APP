@@ -1,0 +1,201 @@
+<!-- <div class="dashboard">
+    <h1>Dashboard</h1>
+  
+    <div class="stats">
+      <div class="stat-card">
+        <h3>Total Tickets</h3>
+        <p>150</p>
+      </div>
+      <div class="stat-card">
+        <h3>Open Tickets</h3>
+        <p>50</p>
+      </div>
+      <div class="stat-card">
+        <h3>Closed Tickets</h3>
+        <p>100</p>
+      </div>
+    </div>
+  
+    <div class="recent-activity">
+      <h2>Recent Activities</h2>
+      <ul>
+        <li>Ticket #123 has been resolved.</li>
+        <li>User John Doe has opened a new ticket.</li>
+        <li>Ticket #124 is being reviewed by support.</li>
+      </ul>
+    </div>
+  </div>
+   -->
+
+
+   <div class="dashboard">
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <div class="dashboard-actions">
+      <button class="refresh-btn" (click)="refreshData()">
+        <span class="icon">🔄</span>
+        Refresh
+      </button>
+      <select class="time-filter" [(ngModel)]="selectedTimeRange" (change)="onTimeRangeChange()">
+        <option value="today">Today</option>
+        <option value="week">This Week</option>
+        <option value="month">This Month</option>
+        <option value="year">This Year</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats">
+    <div class="stat-card total">
+      <div class="stat-icon">🎫</div>
+      <div class="stat-content">
+        <h3>Total Tickets</h3>
+        <p class="stat-number">{{ ticketStats.total }}</p>
+        <span class="stat-change positive">+12% from last month</span>
+      </div>
+    </div>
+    <div class="stat-card open">
+      <div class="stat-icon">📂</div>
+      <div class="stat-content">
+        <h3>Open Tickets</h3>
+        <p class="stat-number">{{ ticketStats.open }}</p>
+        <span class="stat-change neutral">{{ ticketStats.open > 60 ? 'High volume' : 'Normal' }}</span>
+      </div>
+    </div>
+    <div class="stat-card closed">
+      <div class="stat-icon">✅</div>
+      <div class="stat-content">
+        <h3>Closed Tickets</h3>
+        <p class="stat-number">{{ ticketStats.closed }}</p>
+        <span class="stat-change positive">+8% resolution rate</span>
+      </div>
+    </div>
+    <div class="stat-card pending">
+      <div class="stat-icon">⏳</div>
+      <div class="stat-content">
+        <h3>Pending Review</h3>
+        <p class="stat-number">{{ ticketStats.pending }}</p>
+        <span class="stat-change negative">Needs attention</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts-section">
+    <div class="chart-container">
+      <div class="chart-header">
+        <h2>Ticket Trends</h2>
+        <div class="chart-legend">
+          <span class="legend-item created">
+            <span class="legend-color"></span>
+            Created
+          </span>
+          <span class="legend-item resolved">
+            <span class="legend-color"></span>
+            Resolved
+          </span>
+        </div>
+      </div>
+      <canvas id="ticketTrendsChart" class="chart-canvas"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-header">
+        <h2>Ticket Status Distribution</h2>
+      </div>
+      <canvas id="statusPieChart" class="chart-canvas pie-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- Additional Charts Row -->
+  <div class="charts-section">
+    <div class="chart-container">
+      <div class="chart-header">
+        <h2>Priority Breakdown</h2>
+      </div>
+      <canvas id="priorityChart" class="chart-canvas"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-header">
+        <h2>Resolution Time</h2>
+        <span class="chart-subtitle">Average time to resolve tickets</span>
+      </div>
+      <canvas id="resolutionTimeChart" class="chart-canvas"></canvas>
+    </div>
+  </div>
+
+  <!-- Performance Metrics -->
+  <div class="performance-section">
+    <h2>Performance Metrics</h2>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <h4>Average Resolution Time</h4>
+        <div class="metric-value">{{ performanceMetrics.avgResolutionTime }}</div>
+        <div class="metric-unit">hours</div>
+      </div>
+      <div class="metric-card">
+        <h4>Customer Satisfaction</h4>
+        <div class="metric-value">{{ performanceMetrics.customerSatisfaction }}</div>
+        <div class="metric-unit">%</div>
+      </div>
+      <div class="metric-card">
+        <h4>First Response Time</h4>
+        <div class="metric-value">{{ performanceMetrics.firstResponseTime }}</div>
+        <div class="metric-unit">minutes</div>
+      </div>
+      <div class="metric-card">
+        <h4>Agent Productivity</h4>
+        <div class="metric-value">{{ performanceMetrics.agentProductivity }}</div>
+        <div class="metric-unit">tickets/day</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activity -->
+  <div class="recent-activity">
+    <div class="activity-header">
+      <h2>Recent Activities</h2>
+      <button class="view-all-btn" (click)="viewAllActivities()">View All</button>
+    </div>
+    <div class="activity-list">
+      <div class="activity-item" *ngFor="let activity of recentActivities; let i = index" 
+           [class]="'activity-' + activity.type">
+        <div class="activity-icon">
+          <span>{{ getActivityIcon(activity.type) }}</span>
+        </div>
+        <div class="activity-content">
+          <p class="activity-message">{{ activity.message }}</p>
+          <span class="activity-time">{{ activity.time }}</span>
+        </div>
+        <div class="activity-status" [class]="'status-' + activity.priority">
+          {{ activity.priority }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <h2>Quick Actions</h2>
+    <div class="actions-grid">
+      <button class="action-btn create" (click)="createNewTicket()">
+        <span class="action-icon">➕</span>
+        <span class="action-text">Create Ticket</span>
+      </button>
+      <button class="action-btn assign" (click)="assignTickets()">
+        <span class="action-icon">👥</span>
+        <span class="action-text">Assign Tickets</span>
+      </button>
+      <button class="action-btn report" (click)="generateReport()">
+        <span class="action-icon">📊</span>
+        <span class="action-text">Generate Report</span>
+      </button>
+      <button class="action-btn settings" (click)="openSettings()">
+        <span class="action-icon">⚙️</span>
+        <span class="action-text">Settings</span>
+      </button>
+    </div>
+  </div>
+</div>

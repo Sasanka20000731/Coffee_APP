@@ -1,0 +1,86 @@
+<div class="insert-master-store container mt-5 p-4 shadow rounded bg-light">
+    <h1 class="mb-4 text-center">Insert Master Store</h1>
+    <form #masterStoreForm="ngForm" (ngSubmit)="onSubmit(masterStoreForm)">
+      
+      <!-- Purchased Count -->
+      <div class="form-group mb-3">
+        <label for="purchasedCount" class="form-label">Purchased Count:</label>
+        <input
+          type="number"
+          id="purchasedCount"
+          name="purchasedCount"
+          ngModel
+          required
+          #purchasedCount="ngModel"
+          class="form-control"
+          placeholder="Enter the purchased count"
+          aria-describedby="purchasedCountHelp"
+        />
+        <div *ngIf="purchasedCount.invalid && purchasedCount.touched" class="text-danger">
+          Purchased Count is required.
+        </div>
+      </div>
+  
+      <!-- Unit Price -->
+      <div class="form-group mb-3">
+        <label for="unitPrice" class="form-label">Unit Price:</label>
+        <input
+          type="number"
+          step="0.01"
+          id="unitPrice"
+          name="unitPrice"
+          ngModel
+          required
+          #unitPrice="ngModel"
+          class="form-control"
+          placeholder="Enter the unit price"
+          aria-describedby="unitPriceHelp"
+        />
+        <div *ngIf="unitPrice.invalid && unitPrice.touched" class="text-danger">
+          Unit Price is required.
+        </div>
+      </div>
+  
+      <!-- Purchased Date -->
+      <div class="form-group mb-3">
+        <label for="purchasedDate" class="form-label">Purchased Date:</label>
+        <input
+          type="datetime-local"
+          id="purchasedDate"
+          name="purchasedDate"
+          ngModel
+          required
+          #purchasedDate="ngModel"
+          class="form-control"
+          aria-describedby="purchasedDateHelp"
+        />
+        <div *ngIf="purchasedDate.invalid && purchasedDate.touched" class="text-danger">
+          Purchased Date is required.
+        </div>
+      </div>
+  
+      <!-- Product Category Dropdown -->
+      <!-- <div class="form-group mb-3">
+        <label for="productCategory" class="form-label">Product Category:</label>
+        <select
+          class="form-select"
+          id="productCategory"
+          [(ngModel)]="selectedProductCategoryId"
+          name="productCategory"
+          required
+          aria-describedby="productCategoryHelp"
+        >
+          <option *ngFor="let category of productCategories" [value]="category.value">{{ category.name }}</option>
+        </select>
+        <div *ngIf="productCategory.invalid && productCategory.touched" class="text-danger">
+          Product Category is required.
+        </div>
+      </div> -->
+  
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="masterStoreForm.invalid" class="btn btn-primary w-100">
+        Insert
+      </button>
+    </form>
+  </div>
+  
