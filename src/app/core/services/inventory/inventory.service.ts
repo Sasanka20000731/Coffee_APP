@@ -3,6 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigService } from '../../core/config.service';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
+
+export interface ProductGroup {
+  value: number;
+  name: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,9 +30,28 @@ export class InventoryService {
   }
 
   getProductGroups(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/GetAllProductGroups/`);
+    return this.http.get<ProductGroup[]>(`${this.apiUrl}/GetAllProductGroups/`); // this one is not calling to backend 
+
   }
 
-  // Add other inventory-related methods here
-  
+  // getProductCategoryById(id: number): Observable<any> {
+  //   return this.http.get<any>(`${this.apiUrl}/GetProductCategoryById/${id}`);
+  //    // https://localhost:7028/api/Inventory/GetProductCategoryById?id=1007
+  //    // url should be like this
+
+  // }
+
+  getProductCategoryById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/GetProductCategoryById`, {
+      params: { id: id.toString() }
+    });
+  }
+
+  updateProductCategory(productCategoryData: any): Observable<any> {
+    debugger
+    return this.http.put<Boolean>(`${this.apiUrl}/UpdateProductCategory/`, productCategoryData);
+  }
+
+
+
 }

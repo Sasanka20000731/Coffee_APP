@@ -20,6 +20,7 @@ import { OrderListComponent } from './features/order-management/order-list/order
 import { AuthGuard } from './core/guards/core/guards/auth.guard';
 import { ProductCategoryAddComponent } from './features/inventory/product-category-add/product-category-add.component';
 import { ProductCategoryViewAllComponent } from './features/inventory/product-category-view-all/product-category-view-all.component';
+import { ProductCategoryUpdateComponent } from './features/inventory/product-category-update/product-category-update.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
      {path: 'order-management/order-list', component: OrderListComponent},
      {path: 'inventory/product-category-add', component: ProductCategoryAddComponent},
      {path: 'inventory/product-category-view-all', component: ProductCategoryViewAllComponent},
+     {path: 'inventory/product-category-update/:id', component: ProductCategoryUpdateComponent}
 
     ],
    

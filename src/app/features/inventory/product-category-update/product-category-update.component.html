@@ -1,0 +1,60 @@
+<div class="container mt-4">
+  <h3>Update Product Category</h3>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label">Product Name</label>
+      <input type="text" class="form-control" formControlName="productName" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" formControlName="productDescription"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Ingredients</label>
+      <input type="text" class="form-control" formControlName="ingreedians" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Active</label>
+      <input type="checkbox" class="form-check-input ms-2" formControlName="active" />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Product Group</label>
+      <!-- <select class="form-select" formControlName="productGroupId">
+        <option [ngValue]="null">-- Select Group --</option>
+        <option *ngFor="let group of productGroups" [value]="group.productId">
+          {{ group.productName }}
+        </option>
+      </select> - -->
+
+      <!-- <select class="form-select" formControlName="productGroupId">
+        <option [ngValue]="null">-- Select Group --</option>
+        <option *ngFor="let group of productGroups" [value]="group.productId">
+          {{ group.productName }}
+        </option>
+      </select> -->
+
+      <select class="form-select" formControlName="productGroupId">
+  <option [ngValue]="null">-- Select Group --</option>
+  <option *ngFor="let group of productGroups" [value]="group.value">
+    {{ group.name }}
+  </option>
+</select>
+
+
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      Update
+    </button>
+
+
+    <!-- <button type="button" class="btn btn-secondary ms-2" (click)="navigate(['/inventory/product-category-view-all'])">
+      Cancel
+    </button> -->
+  </form>
+</div>

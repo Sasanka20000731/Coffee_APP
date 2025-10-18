@@ -4,5 +4,7 @@ export interface ProductCategory {
   productDescription?: string;
   ingreedians?: string;
    active:boolean;
+    productGroupId: number;
+    CreateDate:Date;
 }
 

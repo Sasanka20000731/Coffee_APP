@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ProductCategory } from 'src/app/core/models/productCategory/IProductCategory';
-import { InventoryService } from 'src/app/core/services/inventory/inventory.service';
+import { InventoryService ,ProductGroup} from 'src/app/core/services/inventory/inventory.service';
 import { ProductcategoryListStore } from 'src/app/core/store/productCategory-store.service';
 
 interface DropDown {
@@ -38,14 +38,28 @@ export class ProductCategoryAddComponent implements OnInit, OnDestroy {
       active: [true] // Default to active
     });
   }
-
+  productGroup: ProductGroup[] = [];
+  selectedproductGroupId: number | null = null;
   ngOnInit(): void {
     debugger
-    // Load product groups from store
-    this.inventoryService.getProductGroups();
-    
+      this.loadProductGroups();
 
   }
+
+    loadProductGroups(): void {
+      //debugger
+     this.inventoryService.getProductGroups().subscribe(
+        (data: ProductGroup[]) => {
+          console.log('User Types Loaded:', data);
+          this.productGroup = data;
+          debugger
+        },
+        (error) => {
+          console.error('Error loading Product groups:', error);
+          alert('Failed to load Product groups. Check the console for details.');
+        }
+      );
+    }
 
   ngOnDestroy(): void {
     this.destroy$.next();

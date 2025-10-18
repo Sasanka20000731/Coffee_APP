@@ -12,12 +12,14 @@ export class ProductcategoryListStore {
   private _loading = new BehaviorSubject<boolean>(false);
   private _error = new BehaviorSubject<string | null>(null);
   private _groups = new BehaviorSubject<ProductGroup[]>([]);
+  private _selectedCategory = new BehaviorSubject<ProductCategory | null>(null);
 
   // Public observables
   public productcategorys$ = this._productcategorys.asObservable();
   public loading$ = this._loading.asObservable();
   public error$ = this._error.asObservable();
   public productGroups$ = this._groups.asObservable();
+  public selectedCategory$ = this._selectedCategory.asObservable();
 
   constructor(private inventoryService: InventoryService) {}
 
@@ -37,6 +39,11 @@ export class ProductcategoryListStore {
         console.error('Error loading product categories:', error);
       }
     });
+  }
+
+    // Get selected category
+  getSelectedCategory(): ProductCategory | null {
+    return this._selectedCategory.value;
   }
 
   // Add a new product category
@@ -90,6 +97,11 @@ debugger
   getCurrentCategories(): ProductCategory[] {
     return this._productcategorys.value;
   }
+
+  // In ProductcategoryListStore
+setSelectedCategory(category: ProductCategory | null): void {
+  this._selectedCategory.next(category);
+}
 
   // Clear store
   clearStore(): void {

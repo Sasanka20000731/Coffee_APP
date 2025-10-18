@@ -22,6 +22,7 @@ import { ProductCategoryAddComponent } from './features/inventory/product-catego
 import { ProductCategoryViewAllComponent } from './features/inventory/product-category-view-all/product-category-view-all.component';
 import { OrderCreationComponent } from './features/order-management/order-creation/order-creation/order-creation.component';
 import { OrderListComponent } from './features/order-management/order-list/order-list/order-list.component';
+import { ProductCategoryUpdateComponent } from './features/inventory/product-category-update/product-category-update.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { OrderListComponent } from './features/order-management/order-list/order
     ProductCategoryAddComponent,
     ProductCategoryViewAllComponent,
     OrderCreationComponent,
-    OrderListComponent
+    OrderListComponent,
+    ProductCategoryUpdateComponent
   ],
   imports: [
     BrowserModule,

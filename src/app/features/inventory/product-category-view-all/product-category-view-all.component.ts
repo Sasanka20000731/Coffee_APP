@@ -53,6 +53,7 @@ export class ProductCategoryViewAllComponent implements OnInit, OnDestroy {
   }
 
   loadProductCategories(): void {
+
     this.productcategoryListStore.loadProductCategories();
   }
 
@@ -60,10 +61,16 @@ export class ProductCategoryViewAllComponent implements OnInit, OnDestroy {
     this.router.navigate(['/product-category', category.productId]);
   }
 
-  onEditCategory(category: ProductCategory): void {
-    this.router.navigate(['/product-category/edit', category.productId]);
-  }
+onEditCategory(category: ProductCategory): void {
 
+  this.productcategoryListStore.setSelectedCategory(category);
+  this.router.navigate(['/inventory/product-category-update', category.productId]);
+}
+
+// onEditCategory(category: ProductCategory): void {
+//   this.productcategoryListStore.setSelectedCategory(category);
+//   this.router.navigate(['/inventory/product-category-update', category.productId]);
+// }
 
 
   onAddCategory(): void {

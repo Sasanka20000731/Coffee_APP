@@ -1,0 +1,25 @@
+/* ...existing code... */
+.container {
+  max-width: 900px;
+  margin-top: 4%;
+  margin-left: 4%;
+}
+
+.card-header.bg-primary {
+  background: linear-gradient(90deg, #0d6efd, #0056b3);
+}
+
+.required::after {
+  content: " *";
+  color: #dc3545;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+/* Small responsive tweaks */
+@media (max-width: 576px) {
+  .container { padding-left: 10px; padding-right: 10px; }
+}
+/* ...existing code... */

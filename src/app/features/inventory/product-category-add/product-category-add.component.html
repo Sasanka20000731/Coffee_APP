@@ -8,21 +8,15 @@
             Add New Product Category
           </h4>
         </div>
-        
+
         <div class="card-body">
           <form [formGroup]="productCategoryForm" (ngSubmit)="onSubmit()" novalidate>
-            
+
             <!-- Product Name -->
             <div class="mb-3">
               <label for="productName" class="form-label required">Product Name</label>
-              <input 
-                type="text" 
-                class="form-control"
-                [class.is-invalid]="isFieldInvalid('productName')"
-                id="productName"
-                formControlName="productName"
-                placeholder="Enter product name"
-                maxlength="100">
+              <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('productName')"
+                id="productName" formControlName="productName" placeholder="Enter product name" maxlength="100">
               <div class="invalid-feedback" *ngIf="isFieldInvalid('productName')">
                 <small *ngIf="productCategoryForm.get('productName')?.errors?.['required']">
                   Product name is required
@@ -37,32 +31,18 @@
             <!-- Product Group -->
             <div class="mb-3">
               <label for="productGroup" class="form-label required">Product Group</label>
-              <select 
-                class="form-select"
-                [class.is-invalid]="isFieldInvalid('productGroup')"
-                id="productGroup"
-                formControlName="productGroup"
-                aria-describedby="productGroupHelp">
-                <option value="" disabled>Select a product group</option>
-                <option *ngFor="let group of productGroups" [value]="group.Value">
-                  {{ group.Name }}
-                </option>
+
+              <select class="form-group" [class.is-invalid]="isFieldInvalid('productGroup')" id="productGroup"
+                formControlName="productGroup" [(ngModel)]="selectedproductGroupId" name="productGroup"
+                class="form-select" required aria-describedby="productGroupHelp">
+                <option *ngFor="let type of productGroup" [value]="type.value">{{ type.name }}</option>
               </select>
-              <div class="invalid-feedback" *ngIf="isFieldInvalid('productGroup')">
-                <small *ngIf="productCategoryForm.get('productGroup')?.errors?.['required']">
-                  Product group is required
-                </small>
-              </div>
-            </div>  
+            </div>
 
             <!-- Product Description -->
             <div class="mb-3">
               <label for="productDescription" class="form-label">Product Description</label>
-              <textarea 
-                class="form-control"
-                id="productDescription"
-                formControlName="productDescription"
-                rows="3"
+              <textarea class="form-control" id="productDescription" formControlName="productDescription" rows="3"
                 placeholder="Enter product description (optional)">
               </textarea>
             </div>
@@ -70,11 +50,7 @@
             <!-- Ingredients -->
             <div class="mb-3">
               <label for="ingreedians" class="form-label">Ingredients</label>
-              <textarea 
-                class="form-control"
-                id="ingreedians"
-                formControlName="ingreedians"
-                rows="2"
+              <textarea class="form-control" id="ingreedians" formControlName="ingreedians" rows="2"
                 placeholder="Enter ingredients (optional)">
               </textarea>
             </div>
@@ -82,12 +58,7 @@
             <!-- Active Status -->
             <div class="mb-3">
               <div class="form-check form-switch">
-                <input 
-                  class="form-check-input" 
-                  type="checkbox" 
-                  role="switch"
-                  id="active"
-                  formControlName="active">
+                <input class="form-check-input" type="checkbox" role="switch" id="active" formControlName="active">
                 <label class="form-check-label" for="active">
                   Active Status
                 </label>
@@ -97,18 +68,11 @@
 
             <!-- Form Actions -->
             <div class="d-flex gap-2 justify-content-end">
-              <button 
-                type="button" 
-                class="btn btn-secondary"
-                (click)="onCancel()"
-                [disabled]="isSubmitting">
+              <button type="button" class="btn btn-secondary" (click)="onCancel()" [disabled]="isSubmitting">
                 <i class="fas fa-times me-1"></i>
                 Cancel
               </button>
-              <button 
-                type="submit" 
-                class="btn btn-primary"
-                [disabled]="productCategoryForm.invalid || isSubmitting">
+              <button type="submit" class="btn btn-primary" [disabled]="productCategoryForm.invalid || isSubmitting">
                 <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status"></span>
                 <i *ngIf="!isSubmitting" class="fas fa-save me-1"></i>
                 {{ isSubmitting ? 'Saving...' : 'Save Product Category' }}
@@ -127,7 +91,7 @@
         <div class="card-body">
           <p><strong>Form Valid:</strong> {{ productCategoryForm.valid }}</p>
           <p><strong>Form Value:</strong></p>
-          <pre>{{ getFormValue() | json }}</pre>
+          <!-- <pre>{{ getFormValue() | json }}</pre> -->
           <p><strong>Product Groups:</strong></p>
           <pre>{{ productGroups | json }}</pre>
         </div>
